@@ -6,6 +6,7 @@ import com.prachiii18.HospitalManagementSystem.dto.IPatientInfo;
 import com.prachiii18.HospitalManagementSystem.entity.BloodGroupType;
 import com.prachiii18.HospitalManagementSystem.entity.PatientEntity;
 import com.prachiii18.HospitalManagementSystem.repository.PatientRepository;
+import com.prachiii18.HospitalManagementSystem.service.PatientService;
 import lombok.ToString;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,36 +20,11 @@ public class PatientServiceTests {
     @Autowired
     private PatientRepository patientRepository;
 
+    @Autowired
+    private PatientService patientService;
+
     @Test
     public void testPatients(){
-        List<IPatientInfo> patientsList= patientRepository.getAllPatientsInfo();
-
-        for(IPatientInfo patient:patientsList){
-            System.out.println(patient);
-        }
-    }
-
-    @Test
-    public void testPatients2(){
-        List<CPatientInfo> patientsList= patientRepository.getAllPatientsInfoConcrete();
-
-        for(CPatientInfo patient:patientsList){
-            System.out.println(patient);
-        }
-    }
-
-    @Test
-    public void testPatients3(){
-        List<BloodGroupStats> patientsList= patientRepository.getAllBloodGroupTypes();
-
-        for(var patient:patientsList){
-            System.out.println(patient);
-        }
-    }
-
-    @Test
-    public void testPatients4(){
-        int rowsAffected= patientRepository.updatePatientNameWithId("Tiya", 1L);
-        System.out.println(rowsAffected);
+        patientService.testPatientTransaction();
     }
 }
