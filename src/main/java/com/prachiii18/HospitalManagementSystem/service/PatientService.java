@@ -19,4 +19,10 @@ public class PatientService {
         System.out.println(p1+" "+ p2);
         System.out.println(p1 == p2);
     }
+
+    @Transactional
+    public void deletePatient(Long patientId){
+        patientRepository.findById(patientId).orElseThrow();
+        patientRepository.deleteById(patientId);
+    }
 }

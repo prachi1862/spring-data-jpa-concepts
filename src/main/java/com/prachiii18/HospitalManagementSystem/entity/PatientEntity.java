@@ -1,9 +1,7 @@
 package com.prachiii18.HospitalManagementSystem.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -15,6 +13,9 @@ import java.util.Set;
 @ToString
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PatientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +29,11 @@ public class PatientEntity {
     @CreationTimestamp
     private LocalDate createdAt;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "patient insurance", unique = true)
     private Insurance insurance; //owning side
 
-    @OneToMany(mappedBy = "patient") //inverse side
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL) //inverse side
     private Set<Appointment> appointments= new HashSet<>();
 
 }

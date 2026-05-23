@@ -1,10 +1,7 @@
 package com.prachiii18.HospitalManagementSystem.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
+@Builder
 public class Doctor {
 
     @Id
@@ -29,6 +27,6 @@ public class Doctor {
     @Column(length = 100)
     private String specialization;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor", cascade = {CascadeType.REMOVE}, orphanRemoval = true)
     private Set<Appointment> appointments= new HashSet<>();
 }

@@ -1,10 +1,7 @@
 package com.prachiii18.HospitalManagementSystem.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +10,8 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@ToString
 public class Appointment {
 
     @Id
@@ -26,10 +25,12 @@ public class Appointment {
     private LocalDateTime appointmentTime;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(nullable = false)
     private PatientEntity patient;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(nullable = false)
     private Doctor doctor;
 }
